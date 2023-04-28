@@ -6,69 +6,72 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CoinRowView: View {
+    
+    let singleCoin : CoinModel
+    
     var body: some View {
-        HStack(spacing: 2.0){
+        HStack(){
             
             //Market Cap Rank
-            Text("1")
+            Text("\(singleCoin.marketCapRank)")
                 .font(.caption)
                 .foregroundColor(.gray)
-                .padding(.horizontal, 4)
+                .padding(.horizontal, 2)
             
             //Image
-            Image(systemName: "bitcoinsign.circle.fill")
+            KFImage(URL(string: singleCoin.image))
                 .resizable()
                 .scaledToFit()
                 .frame(width: 32, height: 32)
                 .foregroundColor(.orange)
             
             //Coin Info
-            CoinInfo()
+            CoinInfo(singleCoin: singleCoin)
             
         }
-        .padding(.horizontal)
+        .padding(.horizontal, 6.0)
         .padding(.vertical, 4.0)
     }
 }
 
 struct CoinInfo: View {
+    
+    let singleCoin : CoinModel
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 4.0) {
-            Text("Bitcoin")
+            Text("\(singleCoin.name)")
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .padding(.leading, 4)
             
-            Text("BTC")
+            Text("\(singleCoin.symbol.uppercased())")
                 .foregroundColor(.gray)
                 .font(.caption)
                 .fontWeight(.bold)
                 .padding(.leading, 6)
         }
         .padding(.leading, 2)
+        .foregroundColor(Color.theme.primaryTextColor)
         
         Spacer()
         
         VStack(alignment: .trailing, spacing: 4.0) {
-            Text("$2000")
+            Text(singleCoin.currentPrice.toCurrency())
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .padding(.leading, 4)
             
-            Text("- 10%")
-                .foregroundColor(.green)
+            Text(singleCoin.priceChange24H.toPercentString())
+                .foregroundColor(singleCoin.priceChange24H > 0 ? .green : .red)
                 .font(.caption)
                 .fontWeight(.bold)
                 .padding(.leading, 6)
         }
         .padding(.leading, 2)
-    }
-}
-
-struct CoinRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        CoinRowView()
+        .foregroundColor(Color.theme.primaryTextColor)
     }
 }
