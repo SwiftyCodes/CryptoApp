@@ -34,4 +34,41 @@ extension Double {
         guard let numberPercentString = numberFormatter.string(for: self) else {return "0.00%"}
         return numberPercentString + "%"
     }
+    
+    func asNumberString() -> String {
+        return  String(format: "%.2f", self)
+    }
+    
+    /*
+     convert 1234 to 1.234k
+     convert 12345 to 123.45k
+     */
+    
+    func formattedWithAbbreviation() -> String {
+        let num = abs(Double(self))
+        let sign = (self < 0) ? "-" : ""
+        switch num {
+        case 1_000_000_000_000...:
+            let formated = num / 1_000_000_000_000
+            let stringFormatted = formated.asNumberString()
+            return "\(sign)\(stringFormatted)Tr"
+        case 1_000_000_000...:
+            let formated = num / 1_000_000_000
+            let stringFormatted = formated.asNumberString()
+            return "\(sign)\(stringFormatted)Bn"
+        case 1_000_000...:
+            let formated = num / 1_000_000
+            let stringFormatted = formated.asNumberString()
+            return "\(sign)\(stringFormatted)M"
+        case 1_000...:
+            let formated = num / 1_000
+            let stringFormatted = formated.asNumberString()
+            return "\(sign)\(stringFormatted)K"
+        case 0...:
+            return self.asNumberString()
+        default:
+            return "\(sign)\(self)"
+        }
+    }
 }
+

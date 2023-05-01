@@ -31,6 +31,8 @@
 		1066A59429FC546C00DC5115 /* ChartDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066A59329FC546C00DC5115 /* ChartDataModel.swift */; };
 		1066A59629FC567A00DC5115 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066A59529FC567A00DC5115 /* Date.swift */; };
 		1066A59829FC595F00DC5115 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066A59729FC595F00DC5115 /* ChartView.swift */; };
+		1066A59A29FFE80F00DC5115 /* CustomLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066A59929FFE80F00DC5115 /* CustomLoadingIndicator.swift */; };
+		1066A59C29FFEBB600DC5115 /* LazyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066A59B29FFEBB600DC5115 /* LazyNavigationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		1066A59329FC546C00DC5115 /* ChartDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataModel.swift; sourceTree = "<group>"; };
 		1066A59529FC567A00DC5115 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		1066A59729FC595F00DC5115 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		1066A59929FFE80F00DC5115 /* CustomLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoadingIndicator.swift; sourceTree = "<group>"; };
+		1066A59B29FFEBB600DC5115 /* LazyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,8 @@
 		1066A56529F815F000DC5115 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				1066A59929FFE80F00DC5115 /* CustomLoadingIndicator.swift */,
+				1066A59B29FFEBB600DC5115 /* LazyNavigationView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -292,6 +298,7 @@
 			files = (
 				1066A58A29FBCF7300DC5115 /* StatisticCoinView.swift in Sources */,
 				1066A57029F81A8300DC5115 /* TopMoversView.swift in Sources */,
+				1066A59C29FFEBB600DC5115 /* LazyNavigationView.swift in Sources */,
 				1066A57429F832FC00DC5115 /* AllCoinView.swift in Sources */,
 				1066A56E29F8167400DC5115 /* HomeView.swift in Sources */,
 				1066A57829F83D6000DC5115 /* HomeViewModel.swift in Sources */,
@@ -305,6 +312,7 @@
 				1066A57A29F8FA5300DC5115 /* CoinModel.swift in Sources */,
 				1066A58C29FBD63900DC5115 /* StatisticModel.swift in Sources */,
 				1066A58429FAE8B100DC5115 /* CoinDetailsView.swift in Sources */,
+				1066A59A29FFE80F00DC5115 /* CustomLoadingIndicator.swift in Sources */,
 				1066A57F29FABA2000DC5115 /* Double.swift in Sources */,
 				1066A58E29FBD7B300DC5115 /* PreviewProvider.swift in Sources */,
 				1066A59829FC595F00DC5115 /* ChartView.swift in Sources */,

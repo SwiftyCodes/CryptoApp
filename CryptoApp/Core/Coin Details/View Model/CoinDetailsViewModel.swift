@@ -5,7 +5,7 @@
 //  Created by Anudhi on 28/04/23.
 //
 
-import Foundation
+import SwiftUI
 
 class CoinDetailsViewModel {
     
@@ -24,6 +24,15 @@ class CoinDetailsViewModel {
         configireChartData()
     }
     
+    var coinName : String {
+        return coin.name
+    }
+    
+    var chartLineColor : Color {
+        let priceChange = (coin.sparklineIn7D?.price.last ?? 0) - (coin.sparklineIn7D?.price.first ?? 0)
+        return priceChange > 0 ? .green : .red
+    }
+    
     var overViewSectionModel : CoinDetailsSectionModel {
         
         //Current Price
@@ -32,9 +41,9 @@ class CoinDetailsViewModel {
         let priceStats = StatisticModel(title: "Current Price", value: price, percentageChange: pricePercentageChnage)
         
         //Market Cap Stats
-        let marketCap = coin.currentPrice.toCurrency()
+        let marketCap = coin.marketCap ?? 0
         let marketCapPercentageChnage = coin.priceChangePercentage24H
-        let marketCapStats = StatisticModel(title: "Market Capatalization", value: marketCap, percentageChange: marketCapPercentageChnage)
+        let marketCapStats = StatisticModel(title: "Market Capatalization", value: marketCap.formattedWithAbbreviation(), percentageChange: marketCapPercentageChnage)
         
         //Rank
         let rank = coin.marketCapRank
@@ -42,7 +51,7 @@ class CoinDetailsViewModel {
         
         //Volume
         let volume = coin.totalVolume ?? 0.0
-        let volumeStats = StatisticModel(title: "Volume", value: "\(volume)", percentageChange: nil)
+        let volumeStats = StatisticModel(title: "Volume", value: volume.formattedWithAbbreviation(), percentageChange: nil)
         
         return CoinDetailsSectionModel(sectionName: "Overview", statisticModel: [priceStats, marketCapStats, rankStats, volumeStats])
     }
@@ -63,9 +72,9 @@ class CoinDetailsViewModel {
         let priceChange24hStats = StatisticModel(title: "24H Price Change", value: priceChange24h, percentageChange: pricePercentageChnage24h)
         
         //24h market cap
-        let marketCap24h = coin.marketCapChange24H?.toCurrency() ?? "N/A"
+        let marketCap24h = coin.marketCapChange24H ?? 0.0
         let marketCapPercentageChnage24h = coin.marketCapChangePercentage24H
-        let marketCap24hStats = StatisticModel(title: "24H Market Cap", value: marketCap24h, percentageChange: marketCapPercentageChnage24h)
+        let marketCap24hStats = StatisticModel(title: "24H Market Cap", value: "$\(marketCap24h.formattedWithAbbreviation())", percentageChange: marketCapPercentageChnage24h)
         
         return CoinDetailsSectionModel(sectionName: "Additional Details", statisticModel: [high24hStats, low24hStats, priceChange24hStats, marketCap24hStats])
     }
@@ -76,10 +85,10 @@ class CoinDetailsViewModel {
         self.minPrice = priceData.min()!
         self.maxPrice = priceData.max()!
         self.yAxisValues = [minPrice , (minPrice + maxPrice)/2 ,maxPrice]
-        self.xAxisValues = [startDate, endDate]
-        self.endDate = Date(coinGeckoDateString: coin.lastUpdated ?? "")
         //7 days, 24h, 60 mins, 60 sec
+        self.endDate = Date(coinGeckoDateString: coin.lastUpdated ?? "")
         self.startDate = endDate.addingTimeInterval(-7 * 24 * 60 * 60)
+        self.xAxisValues = [startDate, endDate]
         for price in priceData.reversed() {
             //-1 hour, 60 mins, 60 sec
             let date = endDate.addingTimeInterval(-1 * 60 * 60 * Double(index))

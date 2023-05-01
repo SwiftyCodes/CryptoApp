@@ -11,6 +11,7 @@ class HomeViewModel : ObservableObject {
     
     @Published var coinsData = [CoinModel]()
     @Published var topCoins = [CoinModel]()
+    @Published var isLoadingData = true
     
     init() {
         fetchCoinData()
@@ -23,6 +24,7 @@ class HomeViewModel : ObservableObject {
         URLSession.shared.dataTask(with: url) { dataValue, responseValue, errorValue in
             if let error = errorValue {
                 print("DEBUG : Error \(error)")
+                self.isLoadingData = false
                 return
             }
             if let response = responseValue as? HTTPURLResponse {
@@ -34,10 +36,12 @@ class HomeViewModel : ObservableObject {
                 DispatchQueue.main.async {
                     self.coinsData = coinsData
                     self.configureTopMovers()
+                    self.isLoadingData = false
                 }
                 print("DEBUG Coins data \(coinsData)")
             } catch let err {
                 print("DEBUG decoder error \(err)")
+                self.isLoadingData = false
             }
 
         }.resume()

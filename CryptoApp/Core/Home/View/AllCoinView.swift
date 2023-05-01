@@ -32,11 +32,10 @@ struct AllCoinView: View {
                     ForEach(viewModel.coinsData) { singleCoin in
                         //Row Coin View
                         NavigationLink {
-                            CoinDetailsView(coin: singleCoin)
+                            LazyNavigationView(build: CoinDetailsView(coin: singleCoin))
                         } label: {
                             CoinRowView(singleCoin: singleCoin)
                         }
-
                     }
                 }
             }

@@ -13,15 +13,21 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
-                
-                //Top Movers View
-                VStack {
-                    TopMoversView(viewModel: viewModel)
+            ZStack {
+                ScrollView(.vertical, showsIndicators: false) {
+                    
+                    //Top Movers View
+                    VStack {
+                        TopMoversView(viewModel: viewModel)
+                    }
+                    Divider()
+                    //All Coins View
+                    AllCoinView(viewModel: viewModel)
                 }
-                Divider()
-                //All Coins View
-                AllCoinView(viewModel: viewModel)
+                
+                if viewModel.isLoadingData {
+                    CustomLoadingIndicator()
+                }
             }
             .navigationTitle("Live Prices")
         }
